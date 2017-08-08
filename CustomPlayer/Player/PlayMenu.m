@@ -13,6 +13,7 @@
 {
     BOOL isPlay;
     BOOL isHour;
+    NSTimer *timer;
 }
 
 @property (nonatomic,strong) UIView *topMenu;
@@ -35,6 +36,10 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         [self creatUI];
+        
+        self.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu:)];
+        [self addGestureRecognizer:tap];
     }
     return self;
 }
@@ -179,10 +184,16 @@
         self.xjFull = NO;
         [self.fullButton setImage:[UIImage imageNamed:@"fullscreen"] forState:UIControlStateNormal];
         self.topMenu.hidden = YES;
+        
+        [timer invalidate];
+        timer = nil;
+        
     }else{
         self.xjFull = YES;
         [self.fullButton setImage:[UIImage imageNamed:@"nofull"] forState:UIControlStateNormal];
         self.topMenu.hidden = NO;
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(hiddenMenu) userInfo:nil repeats:NO];
     }
     
     if (self.xjFullOrSmallBlock) {
@@ -281,6 +292,47 @@
     }else{
         self.timeLabel.text = [NSString stringWithFormat:@"00:%@/00:%@",time1,time2];
     }
+}
+
+- (void)animation1
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.topMenu.frame = CGRectMake(0, -40, self.frame.size.width, 40);
+        self.bottomMenu.frame = CGRectMake(0, self.height, self.width, 40);
+    }];
+}
+
+- (void)animation2
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.topMenu.frame = CGRectMake(0, 0, self.frame.size.width, 40);
+        self.bottomMenu.frame = CGRectMake(0, self.height - 40, self.width, 40);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)showMenu:(UITapGestureRecognizer *)tap
+{
+    if (self.xjFull) {
+        [timer invalidate];
+        [self animation2];
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(hiddenMenu) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)hiddenMenu
+{
+    if (self.xjFull) {
+        [self animation1];
+    }
+}
+
+- (void)dealloc
+{
+    [timer invalidate];
+    timer = nil;
 }
 
 @end
