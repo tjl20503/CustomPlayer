@@ -32,11 +32,13 @@
     WS(weakSelf);
     myPlayer = [[XjAVPlayerSDK alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
     myPlayer.xjAutoOrient = YES;
-    //    myPlayer.XjAVPlayerSDKDelegate = self;
     myPlayer.IsfullBlock = ^(BOOL tag) {
         weakSelf.navigationController.navigationBarHidden = tag;
     };
     myPlayer.xjPlayerUrl = @"http://baobab.wdjcdn.com/14564977406580.mp4";
+//    myPlayer.xjPlayer.xjTotalTimeBlock = ^(CGFloat time) {
+//        NSLog(@"%f",time);
+//    };
     [self.view addSubview:myPlayer];
 }
 

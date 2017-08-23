@@ -187,23 +187,6 @@
     }];
 }
 
-//刷新，看播放是否卡顿
-//- (void)upadte
-//{
-//    NSTimeInterval current = CMTimeGetSeconds(self.xjPlayer.currentTime);
-//    if (current == self.lastTime) {
-//        //卡顿
-//        if (self.xjDelayPlay) {
-//            self.xjDelayPlay(YES);
-//        }
-//    }else{//没有卡顿
-//        if (self.xjDelayPlay) {
-//            self.xjDelayPlay(NO);
-//        }
-//    }
-//    self.lastTime = current;
-//}
-
 #pragma mark - **************************** 自定义方法 **********************************
 //计算缓冲区
 - (NSTimeInterval)xjPlayerAvailableDuration{
@@ -240,18 +223,10 @@
 - (void)xjPlay{
     [self.xjPlayer play];
     isPlayNow = YES;
-//    if (!self.link) {
-//        self.link = [CADisplayLink displayLinkWithTarget:self selector:@selector(upadte)];//和屏幕频率刷新相同的定时器
-//        [self.link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-//    }
 }
 
 - (void)xjPause{
     isPlayNow = NO;
-//    if (self.link) {
-//        [self.link removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-//        self.link = nil;
-//    }
     [self.xjPlayer pause];
 }
 
@@ -302,10 +277,6 @@
 }
 
 - (void)xjRemoveObserver{
-//    if (self.link) {
-//        [self.link removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-//        self.link = nil;
-//    }
     [self.xjPlayerItem removeObserver:self forKeyPath:@"status" context:nil];
     [self.xjPlayerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
     [self.xjPlayer removeTimeObserver:self.playbackTimeObserver];

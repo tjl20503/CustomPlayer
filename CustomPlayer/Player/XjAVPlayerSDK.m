@@ -19,7 +19,6 @@
 }
 
 @property (nonatomic, strong)XJAVPlyer *xjPlayer;
-//@property (nonatomic, strong)XJBottomMenu *bottomMenu;
 @property (nonatomic,strong) PlayMenu *menu;
 @property (nonatomic, assign)CGRect firstFrame;//初始化的视屏大小
 @property (nonatomic, strong)NSString *saveUrl;//保存url;
@@ -186,15 +185,6 @@
     self.saveUrl = _xjPlayerUrl;
     self.xjPlayer.xjPlayerUrl = _xjPlayerUrl;
 }
-
-//- (XJBottomMenu *)bottomMenu{
-//    if (_bottomMenu == nil) {
-//        _bottomMenu = [[XJBottomMenu alloc] init];
-//        _bottomMenu.backgroundColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:0.7];
-//        [self xjBottomMenuBlock];
-//    }
-//    return _bottomMenu;
-//}
 
 - (PlayMenu *)menu
 {

@@ -9,7 +9,7 @@
 #import "PlayMenu.h"
 #import "UIView+Utils.h"
 
-@interface PlayMenu ()
+@interface PlayMenu ()<UIGestureRecognizerDelegate>
 {
     BOOL isPlay;
     BOOL isHour;
@@ -39,6 +39,7 @@
         
         self.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu:)];
+        tap.delegate = self;
         [self addGestureRecognizer:tap];
     }
     return self;
@@ -333,6 +334,14 @@
 {
     [timer invalidate];
     timer = nil;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
+    
+    if([touch.view isKindOfClass:[UISlider class]])
+        return NO;
+    else
+        return YES;
 }
 
 @end

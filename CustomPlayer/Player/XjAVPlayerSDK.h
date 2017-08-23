@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import "XJAVPlyer.h"
 
 @protocol XjAVPlayerSDKDelegate <NSObject>
 
@@ -18,10 +19,8 @@
 @interface XjAVPlayerSDK : UIView
 
 #pragma mark - **************************** 外部接口 *************************************
-/**
- *  代理
- */
-@property (nonatomic, strong)id<XjAVPlayerSDKDelegate> XjAVPlayerSDKDelegate;
+
+//@property (nonatomic, strong)XJAVPlyer *xjPlayer;
 /**
  *  视屏播放链接
  */
